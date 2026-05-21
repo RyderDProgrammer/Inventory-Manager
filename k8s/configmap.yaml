@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: inventory-manager-config
+  namespace: inventory-manager
+data:
+  PORT: "8080"
+  ENV: "production"
