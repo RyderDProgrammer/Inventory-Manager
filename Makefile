@@ -14,6 +14,7 @@ docker-down:
 	docker-compose down
 
 k8s-deploy:
+	kubectl apply -f k8s/namespace.yaml
 	kubectl apply -f k8s/
 
 k8s-delete:
