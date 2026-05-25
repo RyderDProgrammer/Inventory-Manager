@@ -22,7 +22,9 @@ func seedItem(t *testing.T, h *Handler) models.Item {
 	rec := httptest.NewRecorder()
 	h.CreateItem(rec, req)
 	var item models.Item
-	json.NewDecoder(rec.Body).Decode(&item)
+	if err := json.NewDecoder(rec.Body).Decode(&item); err != nil {
+		t.Fatalf("seed decode: %v", err)
+	}
 	return item
 }
 
@@ -136,7 +138,7 @@ func TestCreateItem(t *testing.T) {
 			case string:
 				buf.WriteString(v)
 			default:
-				json.NewEncoder(&buf).Encode(v)
+				_ = json.NewEncoder(&buf).Encode(v)
 			}
 			req := httptest.NewRequest(http.MethodPost, "/items", &buf)
 			rec := httptest.NewRecorder()

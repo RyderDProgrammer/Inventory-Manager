@@ -30,7 +30,9 @@ func TestGetAll(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			repo := NewInventoryRepository()
 			for i := 0; i < tt.seed; i++ {
-				repo.Create(models.Item{Name: "Item", SKU: "SKU"})
+				if _, err := repo.Create(models.Item{Name: "Item", SKU: "SKU"}); err != nil {
+					t.Fatalf("seed: %v", err)
+				}
 			}
 			items, err := repo.GetAll()
 			if err != nil {
