@@ -5,7 +5,7 @@ A containerized REST API built with GoLang for managing inventory items. Deploye
 ## Tech Stack
 
 | Layer | Technology |
-|---|---|
+| --- | --- |
 | Language | Go |
 | Containerization | Docker |
 | Orchestration | Kubernetes (minikube) |
@@ -22,7 +22,7 @@ A containerized REST API built with GoLang for managing inventory items. Deploye
 
 ## Project Structure
 
-```
+```text
 .
 ├── .github/workflows/
 │   ├── ci.yml              # Lint, test, build on every push/PR
@@ -43,7 +43,7 @@ A containerized REST API built with GoLang for managing inventory items. Deploye
 ├── docker-compose.yml
 ├── go.mod
 ├── Makefile
-└── .env                    # Local environment variables (gitignored)
+└── .env.example            # Environment variable template
 ```
 
 ## Getting Started
@@ -78,7 +78,7 @@ make k8s-deploy
 ## API Endpoints
 
 | Method | Path | Description |
-|---|---|---|
+| --- | --- | --- |
 | GET | `/health` | Health check |
 | GET | `/items` | List all items |
 | GET | `/items/{id}` | Get item by ID |
@@ -89,14 +89,16 @@ make k8s-deploy
 ## CI/CD Pipeline
 
 **CI (`ci.yml`)** — triggers on every push and pull request:
+
 1. Lint with `golangci-lint`
 2. Run unit tests
 3. Build the binary
 
 **CD (`cd.yml`)** — triggers on merge to `main`:
+
 1. Build and push Docker image to registry
 2. Update the Kubernetes deployment image tag
-3. Apply manifests to the cluster via `kubectl`
+3. Commit updated manifest back to repo (GitOps — run `make k8s-deploy` locally to apply)
 
 ## Makefile Targets
 
@@ -113,7 +115,7 @@ make k8s-delete   # Tear down k8s resources
 ## Environment Variables
 
 | Variable | Description | Default |
-|---|---|---|
+| --- | --- | --- |
 | `PORT` | Port the server listens on | `8080` |
 | `ENV` | Runtime environment | `development` |
 | `DB_URL` | Database connection string | — |
