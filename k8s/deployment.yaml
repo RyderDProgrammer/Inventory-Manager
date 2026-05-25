@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: inventory-manager
-          image: ghcr.io/RyderDProgrammer/Inventory-Manager:sha-5ce1e64
+          image: ghcr.io/RyderDProgrammer/Inventory-Manager:sha-92cc1cb
           ports:
             - containerPort: 8080
           envFrom:
