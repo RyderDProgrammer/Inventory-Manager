@@ -15,8 +15,7 @@ spec:
     spec:
       containers:
         - name: inventory-manager
-          image: inventorymanager-app:latest
-          imagePullPolicy: Never
+          image: ghcr.io/ryderdprogrammer/inventory-manager:latest
           ports:
             - containerPort: 8080
           envFrom:
